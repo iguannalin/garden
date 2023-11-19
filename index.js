@@ -1,0 +1,54 @@
+window.addEventListener("load", () => {
+  function getRandomInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min) + min); // The maximum is exclusive and the minimum is inclusive
+  }
+  const container = document.getElementById("container");
+  let garden = "";
+  function createElement(initial, left=0, top=0, size=0) {
+    if (Math.random()>0.8) return;
+    const pre = document.createElement("pre");
+    pre.innerHTML = "🌳";
+    let left = left;
+    let top = top;
+    let size = size;
+    if (initial) {
+      pre.style.left = left+"px";
+      pre.style.top = top+"px";
+      pre.style.fontSize = size+"px";
+    } else {
+      left = getRandomInt(-100,window.innerWidth-100);
+      top = getRandomInt(-100,window.innerHeight-100);
+      size = getRandomInt(5,18);
+    }
+    if (garden.length > 0) garden+="**"; // separator
+    const cactus = `${left},${top},${fontSize}**`;
+    garden+=cactus;
+    container.appendChild(pre);
+  }
+
+  function moveElements() {
+    garden.split("**").forEach((el)=>{
+      const pieces=el.split(",");
+      console.log({pieces});
+      if (pieces.length < 3) return;
+      createElement(false, pieces[0], pieces[1], pieces[2]);
+    });
+  }
+
+  if (container.dataset.garden) moveElements();
+  else for(let x=0;x<20;x++) createElement(true);
+
+
+  document.body.onclick = (e) => {
+    e.preventDefault();
+    location.reload();
+    console.log(garden);
+    const text = `<!DOCTYPE html><html> <head> <title>garden</title> <meta charset="utf-8"> <meta name="viewport" content="width=device-width, initial-scale=1"> <link rel="stylesheet" href="https://iguannalin.github.io/garden/index.css"/><script src=https://iguannalin.github.io/garden/index.js></script></head> <body> <div id="container" data-garden=${btoa(garden)}></div></body></html>`;
+    const blob = new Blob([text], {type: "text/html"});
+    const blobUrl = URL.createObjectURL(blob);
+    window.open(blobUrl, '_blank');
+    window.URL.revokeObjectURL(blobUrl);
+  }
+});
