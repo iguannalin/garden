@@ -10,20 +10,17 @@ window.addEventListener("load", () => {
     if (Math.random()>0.8) return;
     const pre = document.createElement("pre");
     pre.innerHTML = "🌳";
-    let left = left;
-    let top = top;
-    let size = size;
     if (initial) {
-      pre.style.left = left+"px";
-      pre.style.top = top+"px";
-      pre.style.fontSize = size+"px";
+      pre.style.left = getRandomInt(0,window.innerWidth)+"px";
+      pre.style.top = getRandomInt(0,window.innerHeight)+"px";
+      pre.style.fontSize = getRandomInt(5, 18)+"px";
     } else {
       left = getRandomInt(-100,window.innerWidth-100);
       top = getRandomInt(-100,window.innerHeight-100);
       size = getRandomInt(5,18);
     }
     if (garden.length > 0) garden+="**"; // separator
-    const cactus = `${left},${top},${fontSize}**`;
+    const cactus = `${left},${top},${size}**`;
     garden+=cactus;
     container.appendChild(pre);
   }
@@ -39,7 +36,6 @@ window.addEventListener("load", () => {
 
   if (container.dataset.garden) moveElements();
   else for(let x=0;x<20;x++) createElement(true);
-
 
   document.body.onclick = (e) => {
     e.preventDefault();
