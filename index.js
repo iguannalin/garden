@@ -10,14 +10,14 @@ window.addEventListener("load", () => {
     if (Math.random()>0.8) return;
     const pre = document.createElement("pre");
     pre.innerHTML = "🌳";
-    let nleft = initial ? getRandomInt(-100,window.innerWidth-100) : left;
-    let ntop = initial ? getRandomInt(-100,window.innerHeight-100): top;
-    let nsize = initial ? getRandomInt(5,18) : size;
+    let nleft = initial ? getRandomInt(-100,window.innerWidth-100) : left+1;
+    let ntop = initial ? getRandomInt(-100,window.innerHeight-100): top+1;
+    let nsize = initial ? getRandomInt(5,18) : size+1;
     pre.style.left = nleft+"px";
     pre.style.top = ntop+"px";
     pre.style.fontSize = nsize+"px";
     if (garden.length > 0) garden+="**"; // separator
-    const cactus = `${left},${top},${size}**`;
+    const cactus = `${nleft},${ntop},${nsize}**`;
     garden+=cactus;
     container.appendChild(pre);
   }
