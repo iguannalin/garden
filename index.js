@@ -26,7 +26,7 @@ window.addEventListener("load", () => {
   }
 
   function moveElements() {
-    atob(garden).split("**").forEach((el)=>{
+    garden.split("**").forEach((el)=>{
       const pieces=el.split(",");
       console.log({pieces});
       if (pieces.length < 3) return;
