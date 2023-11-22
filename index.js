@@ -10,15 +10,12 @@ window.addEventListener("load", () => {
     if (Math.random()>0.8) return;
     const pre = document.createElement("pre");
     pre.innerHTML = "🌳";
-    if (initial) {
-      pre.style.left = getRandomInt(0,window.innerWidth)+"px";
-      pre.style.top = getRandomInt(0,window.innerHeight)+"px";
-      pre.style.fontSize = getRandomInt(5, 18)+"px";
-    } else {
-      left = getRandomInt(-100,window.innerWidth-100);
-      top = getRandomInt(-100,window.innerHeight-100);
-      size = getRandomInt(5,18);
-    }
+    let nleft = initial ? left : getRandomInt(-100,window.innerWidth-100);
+    let ntop = initial ? top : getRandomInt(-100,window.innerHeight-100);
+    let nsize = initial ? size : getRandomInt(5,18);
+    pre.style.left = nleft+"px";
+    pre.style.top = ntop+"px";
+    pre.style.fontSize = nsize+"px";
     if (garden.length > 0) garden+="**"; // separator
     const cactus = `${left},${top},${size}**`;
     garden+=cactus;
