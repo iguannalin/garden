@@ -16,10 +16,11 @@ window.addEventListener("load", () => {
     pre.style.left = nleft+"px";
     pre.style.top = ntop+"px";
     pre.style.fontSize = nsize+"px";
-    if (ng.length > 0) garden+="**"; // separator
+    if (ng.length > 0) ng+="**"; // separator
     const cactus = `${nleft},${ntop},${nsize}**`;
     ng+=cactus;
     container.appendChild(pre);
+    return ng;
   }
 
   function moveElements() {
@@ -28,13 +29,13 @@ window.addEventListener("load", () => {
       const pieces=el.split(",");
       console.log({pieces});
       if (pieces.length < 3) return;
-      createElement(false, ngarden, pieces[0], pieces[1], pieces[2]);
+      ngarden = createElement(false, ngarden, pieces[0], pieces[1], pieces[2]);
     });
     garden = ngarden;
   }
 
   if (container.dataset.garden) moveElements();
-  else for(let x=0;x<20;x++) createElement(true, garden);
+  else for(let x=0;x<20;x++) garden = createElement(true, garden);
 
   document.body.onclick = (e) => {
     e.preventDefault();
