@@ -10,9 +10,9 @@ window.addEventListener("load", () => {
     if (Math.random()>0.8) return;
     const pre = document.createElement("pre");
     pre.innerHTML = "🌳";
-    let nleft = initial ? left : getRandomInt(-100,window.innerWidth-100);
-    let ntop = initial ? top : getRandomInt(-100,window.innerHeight-100);
-    let nsize = initial ? size : getRandomInt(5,18);
+    let nleft = initial ? getRandomInt(-100,window.innerWidth-100) : left;
+    let ntop = initial ? getRandomInt(-100,window.innerHeight-100): top;
+    let nsize = initial ? getRandomInt(5,18) : size;
     pre.style.left = nleft+"px";
     pre.style.top = ntop+"px";
     pre.style.fontSize = nsize+"px";
