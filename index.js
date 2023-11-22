@@ -6,7 +6,7 @@ window.addEventListener("load", () => {
   }
   const container = document.getElementById("container");
   let garden = (container.dataset.garden) ? atob(container.dataset.garden) : "";
-  function createElement(initial, left=0, top=0, size=0) {
+  function createElement(initial, ng, left=0, top=0, size=0) {
     if (Math.random()>0.8) return;
     const pre = document.createElement("pre");
     pre.innerHTML = "🌳";
@@ -16,23 +16,25 @@ window.addEventListener("load", () => {
     pre.style.left = nleft+"px";
     pre.style.top = ntop+"px";
     pre.style.fontSize = nsize+"px";
-    if (garden.length > 0) garden+="**"; // separator
+    if (ng.length > 0) garden+="**"; // separator
     const cactus = `${nleft},${ntop},${nsize}**`;
-    garden+=cactus;
+    ng+=cactus;
     container.appendChild(pre);
   }
 
   function moveElements() {
+    let ngarden = "";
     garden.split("**").filter((ch)=>ch).forEach((el)=>{
       const pieces=el.split(",");
       console.log({pieces});
       if (pieces.length < 3) return;
-      createElement(false, pieces[0], pieces[1], pieces[2]);
+      createElement(false, ngarden, pieces[0], pieces[1], pieces[2]);
     });
+    garden = ngarden;
   }
 
   if (container.dataset.garden) moveElements();
-  else for(let x=0;x<20;x++) createElement(true);
+  else for(let x=0;x<20;x++) createElement(true, garden);
 
   document.body.onclick = (e) => {
     e.preventDefault();
