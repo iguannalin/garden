@@ -6,9 +6,9 @@ window.addEventListener("load", () => {
   }
   const container = document.getElementById("container");
   let garden = (container.dataset.garden) ? atob(container.dataset.garden) : "";
-  function createElement(initial, ng, left=0, top=0, size=0) {
+  let ng = "";
+  function createElement(initial, left=0, top=0, size=0) {
     if (Math.random()>0.8) return;
-    console.log({ng});
     const pre = document.createElement("pre");
     pre.innerHTML = "🌳";
     let nleft = initial ? getRandomInt(-100,window.innerWidth-100) : +(left)+1;
@@ -21,9 +21,8 @@ window.addEventListener("load", () => {
     const cactus = `${nleft},${ntop},${nsize}`;
     ng+=cactus;
     container.appendChild(pre);
-    console.log(ng);
+    console.log({ng});
     if (initial) garden = ng;
-    return ng;
   }
 
   function moveElements() {
@@ -38,7 +37,7 @@ window.addEventListener("load", () => {
   }
 
   if (container.dataset.garden) moveElements();
-  else for(let x=0;x<20;x++) createElement(true, garden);
+  else for(let x=0;x<20;x++) createElement(true);
 
   document.body.onclick = (e) => {
     e.preventDefault();
