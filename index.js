@@ -5,7 +5,7 @@ window.addEventListener("load", () => {
     return Math.floor(Math.random() * (max - min) + min); // The maximum is exclusive and the minimum is inclusive
   }
   const container = document.getElementById("container");
-  let garden = "";
+  let garden = (container.dataset.garden) ? atob(container.dataset.garden) : "";
   function createElement(initial, left=0, top=0, size=0) {
     if (Math.random()>0.8) return;
     const pre = document.createElement("pre");
@@ -26,7 +26,7 @@ window.addEventListener("load", () => {
   }
 
   function moveElements() {
-    garden.split("**").forEach((el)=>{
+    atob(garden).split("**").forEach((el)=>{
       const pieces=el.split(",");
       console.log({pieces});
       if (pieces.length < 3) return;
