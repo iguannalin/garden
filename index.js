@@ -10,7 +10,7 @@ window.addEventListener("load", () => {
     if (Math.random()>0.8) return;
     const pre = document.createElement("pre");
     pre.innerHTML = "🌳";
-    let nleft = initial ? getRandomInt(-100,window.innerWidth-100) : left+1;
+    let nleft = initial ? getRandomInt(-100,window.innerWidth-100) : +(left)+1;
     let ntop = initial ? getRandomInt(-100,window.innerHeight-100): top;
     let nsize = initial ? getRandomInt(5,18) : size;
     pre.style.left = nleft+"px";
@@ -23,7 +23,7 @@ window.addEventListener("load", () => {
   }
 
   function moveElements() {
-    garden.split("**").forEach((el)=>{
+    garden.split("**").filter((ch)=>ch).forEach((el)=>{
       const pieces=el.split(",");
       console.log({pieces});
       if (pieces.length < 3) return;
