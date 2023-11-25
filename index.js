@@ -10,7 +10,7 @@ window.addEventListener("load", () => {
     if (initial && Math.random()>0.8) return;
     const pre = document.createElement("pre");
     pre.innerHTML = "🌳";
-    let nleft = initial ? getRandomInt(-100,window.innerWidth-100) : +(left)+2;
+    let nleft = initial ? getRandomInt(-100,window.innerWidth-100) : +(left)+5;
     let ntop = initial ? getRandomInt(-100,window.innerHeight-100): top;
     let nsize = initial ? getRandomInt(5, 25) : size;
     pre.style.left = nleft+"px";
@@ -38,7 +38,7 @@ window.addEventListener("load", () => {
     const text = `<!DOCTYPE html><html> <head> <title>garden</title> <meta charset="utf-8"> <meta name="viewport" content="width=device-width, initial-scale=1"> <link rel="stylesheet" href="https://iguannalin.github.io/garden/index.css"/><script src=https://iguannalin.github.io/garden/index.js></script></head> <body> <div id="container" data-garden=${btoa(garden)}></div></body></html>`;
     const blob = new Blob([text], {type: "text/html"});
     const blobUrl = URL.createObjectURL(blob);
-    window.open(blobUrl, '_blank');
+    window.open(blobUrl, '_self');
     window.URL.revokeObjectURL(blobUrl);
   }
 
