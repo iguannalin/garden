@@ -25,7 +25,6 @@ window.addEventListener("load", () => {
   function moveElements() {
     atob(container.dataset.garden).split("**").filter((ch)=>ch).forEach((el)=>{
       const pieces=el.split(",");
-      console.log({pieces});
       if (pieces.length < 3) return;
       createElement(false, pieces[0], pieces[1], pieces[2]);
     });
