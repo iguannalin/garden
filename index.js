@@ -32,9 +32,9 @@ window.addEventListener("load", () => {
 
   if (container.dataset.garden) moveElements();
   else for(let x=0;x<20;x++) createElement(true);
-
+  
   function handleTap(e) {
-    e.preventDefault();
+    // e.preventDefault();
     const text = `<!DOCTYPE html><html> <head> <title>garden</title> <meta charset="utf-8"> <meta name="viewport" content="width=device-width, initial-scale=1"> <link rel="stylesheet" href="https://iguannalin.github.io/garden/index.css"/><script src=https://iguannalin.github.io/garden/index.js></script></head> <body> <div id="container" data-garden=${btoa(garden)}></div></body></html>`;
     const blob = new Blob([text], {type: "text/html"});
     const blobUrl = URL.createObjectURL(blob);
