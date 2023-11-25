@@ -7,10 +7,10 @@ window.addEventListener("load", () => {
   const container = document.getElementById("container");
   let garden = "";
   function createElement(initial, left=0, top=0, size=0) {
-    if (Math.random()>0.8) return;
+    if (initial && Math.random()>0.8) return;
     const pre = document.createElement("pre");
     pre.innerHTML = "🌳";
-    let nleft = initial ? getRandomInt(-100,window.innerWidth-100) : +(left)+1;
+    let nleft = initial ? getRandomInt(-100,window.innerWidth-100) : +(left)+2;
     let ntop = initial ? getRandomInt(-100,window.innerHeight-100): top;
     let nsize = initial ? getRandomInt(5, 25) : size;
     pre.style.left = nleft+"px";
@@ -20,7 +20,6 @@ window.addEventListener("load", () => {
     const cactus = `${nleft},${ntop},${nsize}`;
     garden+=cactus;
     container.appendChild(pre);
-    console.log({garden});
   }
 
   function moveElements() {
@@ -38,7 +37,6 @@ window.addEventListener("load", () => {
   document.body.onclick = (e) => {
     e.preventDefault();
     e.stopPropagation();
-    console.log(garden);
     const text = `<!DOCTYPE html><html> <head> <title>garden</title> <meta charset="utf-8"> <meta name="viewport" content="width=device-width, initial-scale=1"> <link rel="stylesheet" href="https://iguannalin.github.io/garden/index.css"/><script src=https://iguannalin.github.io/garden/index.js></script></head> <body> <div id="container" data-garden=${btoa(garden)}></div></body></html>`;
     const blob = new Blob([text], {type: "text/html"});
     const blobUrl = URL.createObjectURL(blob);
