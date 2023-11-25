@@ -5,34 +5,31 @@ window.addEventListener("load", () => {
     return Math.floor(Math.random() * (max - min) + min); // The maximum is exclusive and the minimum is inclusive
   }
   const container = document.getElementById("container");
-  let garden = (container.dataset.garden) ? atob(container.dataset.garden) : "";
-  let ng = "";
+  let garden = "";
   function createElement(initial, left=0, top=0, size=0) {
     if (Math.random()>0.8) return;
     const pre = document.createElement("pre");
     pre.innerHTML = "🌳";
     let nleft = initial ? getRandomInt(-100,window.innerWidth-100) : +(left)+1;
     let ntop = initial ? getRandomInt(-100,window.innerHeight-100): top;
-    let nsize = initial ? getRandomInt(5,18) : size;
+    let nsize = initial ? getRandomInt(5, 25) : size;
     pre.style.left = nleft+"px";
     pre.style.top = ntop+"px";
     pre.style.fontSize = nsize+"px";
-    if (ng.length > 0) ng+="**"; // separator
+    if (garden.length > 0) garden+="**"; // separator
     const cactus = `${nleft},${ntop},${nsize}`;
-    ng+=cactus;
+    garden+=cactus;
     container.appendChild(pre);
-    console.log({ng});
-    if (initial) garden = ng;
+    console.log({garden});
   }
 
   function moveElements() {
-    garden.split("**").filter((ch)=>ch).forEach((el)=>{
+    atob(container.dataset.garden).split("**").filter((ch)=>ch).forEach((el)=>{
       const pieces=el.split(",");
       console.log({pieces});
       if (pieces.length < 3) return;
       createElement(false, pieces[0], pieces[1], pieces[2]);
     });
-    garden = ng;
   }
 
   if (container.dataset.garden) moveElements();
@@ -40,6 +37,7 @@ window.addEventListener("load", () => {
 
   document.body.onclick = (e) => {
     e.preventDefault();
+    e.stopPropagation();
     console.log(garden);
     const text = `<!DOCTYPE html><html> <head> <title>garden</title> <meta charset="utf-8"> <meta name="viewport" content="width=device-width, initial-scale=1"> <link rel="stylesheet" href="https://iguannalin.github.io/garden/index.css"/><script src=https://iguannalin.github.io/garden/index.js></script></head> <body> <div id="container" data-garden=${btoa(garden)}></div></body></html>`;
     const blob = new Blob([text], {type: "text/html"});
